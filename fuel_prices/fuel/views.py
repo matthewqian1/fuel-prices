@@ -27,11 +27,11 @@ def index(request):
         if form.is_valid():
             suburb = form.cleaned_data['name']
             postcode = form.cleaned_data['postcode']
-           # try:
-            s = PostcodesGeo.objects.get(postcode=postcode, suburb=suburb)
-            print(s.longitude, s.latitude)
+            fuel_type = form.cleaned_data['fuel_type']
+            #try:
+            s = PostcodesGeo.objects.get(postcode=postcode, suburb__iexact=suburb)
             url = "https://api.onegov.nsw.gov.au/FuelPriceCheck/v1/fuel/prices/nearby"
-            payload = dict(fueltype="P95", brand=[], namedlocation=postcode, latitude=str(s.latitude),
+            payload = dict(fueltype=str(fuel_type), brand=[], namedlocation=postcode, latitude=str(s.latitude),
                            longitude=str(s.longitude),
                            radius="", sortby="price", sortascending="true")
             headers = {
@@ -45,9 +45,6 @@ def index(request):
             response = requests.request("POST", url, data=str(payload), headers=headers).json()
             stations = response['stations']
             prices = response['prices']
-            print(len(stations), len(prices))
-            print(stations[0]['name'])
-            print(response)
             for i in range(len(stations)):
                 info = {
                     'brand': stations[i]['brand'],
@@ -57,11 +54,10 @@ def index(request):
                     'price': prices[i]['price']
                 }
                 station_info.append(info)
-         #   except:
-          #      print('no result exists for your input')
+        #except:
+            #print('no result exists for your input')
         else:
             print('enter only characters for suburb and integer for postcode')
 
     context = {'form': location, 'station_info': station_info, 'hello': 'hi'}
-    print(context)
     return render(request, 'fuel/fuel.html', context)
