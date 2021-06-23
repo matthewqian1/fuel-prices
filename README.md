@@ -1,7 +1,7 @@
 # fuel-prices
 # Finding nearest fuel stations
 
-Displays the nearest gas stations in the suburb that is being searched which sells the fuel type that has been requested
+Displays the gas stations with optimal price and distance from the suburb that is being searched which sells the fuel type that has been requested
 
 ## Description
 
