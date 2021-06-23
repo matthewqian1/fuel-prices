@@ -16,4 +16,6 @@ To run the program, run 'python3 manage.py runserver' in fuel_prices directory.
  - SQL database: Since the API takes latitude and longitude as parameters for location input, it wouldn't be practical to ask for the user 
    to provide this information. To resolve this issue, I outsourced an SQL database which contains Australia suburb names and their corresponding postcodes, latitude and longitude. Hence all I require frrom the user is general information (suburb, postcode). 
    User  -> NSW postcode db -> Fuel API -> result
+   
+###Example application
 ![](fuel_application.png)
