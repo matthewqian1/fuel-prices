@@ -11,4 +11,4 @@ I subconsciously compare fuel prices of different gas station brands as well as 
 
 To run the program, run 'python3 manage.py runserver' in fuel_prices directory.
 
-
+![](fuel_application.png)
